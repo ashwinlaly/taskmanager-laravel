@@ -1,0 +1,12 @@
+body{
+    font-family: 'Sulphur Point', sans-serif;
+}
+li.nav-item.dropdown {
+    list-style: none;
+}
+li.nav-item{
+    list-style: none;
+}
+a.nav-link {
+    color: black;
+}
