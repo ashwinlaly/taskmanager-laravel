@@ -16,6 +16,7 @@
     <link href="https://fonts.googleapis.com/css?family=Sulphur+Point&display=swap" rel="stylesheet"> 
 </head>
 <body>
+    <?php $role = session()->get('userData')['role_id'];?>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -24,65 +25,77 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <!-- <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a> -->
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <!-- <a class="nav-link" href="#">Link</a> -->
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
-                <li class="nav-item dropdown active">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Tasks
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ url('task') }}">Create Task</a>
-                        <a class="dropdown-item" href="{{ url('task') }}">Manage Tasks</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Users
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ url('user') }}">Create User</a>
-                        <a class="dropdown-item" href="{{ url('user') }}">Manage Users</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Projects
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ url('project') }}">Create Project</a>
-                        <a class="dropdown-item" href="{{ url('project') }}">Manage Projects</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Roles
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ url('role') }}">Create Role</a>
-                        <a class="dropdown-item" href="{{ url('role') }}">Manage Roles</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown" >
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{ 'userName' }}
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ url('profile') }}">My Profile</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ url('logout') }}">Logout</a>
-                    </div>
-                </li>
+                @if(($role == 1) || ($role == 2))
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Tasks
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ url('task') }}">Create Task</a>
+                            <a class="dropdown-item" href="{{ url('task') }}">Manage Tasks</a>
+                        </div>
+                    </li>
+                @endif
+                @if(($role == 1) || ($role == 2))
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Users
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ url('user') }}">Create User</a>
+                            <a class="dropdown-item" href="{{ url('user') }}">Manage Users</a>
+                        </div>
+                    </li>
+                @endif
+                @if(($role == 1) || ($role == 2))
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Projects
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ url('projects/create') }}">Create Project</a>
+                            <a class="dropdown-item" href="{{ url('projects') }}">Manage Projects</a>
+                        </div>
+                    </li>
+                @endif
+                @if(($role == 1) || ($role == 2))
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Roles
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ url('role') }}">Create Role</a>
+                            <a class="dropdown-item" href="{{ url('role') }}">Manage Roles</a>
+                        </div>
+                    </li>
+                @endif
+                @if(($role == 1) || ($role == 2))
+                    <li class="nav-item dropdown" >
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ ucfirst(session()->get('userData')['name']) }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ url('profile') }}">My Profile</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ url('logout') }}">Logout</a>
+                        </div>
+                    </li>
+                @endif
             </form>
         </div>
     </nav>
+    @include('layouts.alert')
     @yield('content')
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
     <script src="{{ asset('js/jquery.min.js') }}" ></script>
     <script src="{{ asset('js/bootstrap.min.js') }}" ></script>
     <script src="{{ asset('js/jquery.validation.min.js') }}" ></script>

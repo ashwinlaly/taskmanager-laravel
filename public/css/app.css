@@ -10,3 +10,6 @@ li.nav-item{
 a.nav-link {
     color: black;
 }
+small.error{
+    color: red !important;
+}
