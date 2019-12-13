@@ -2,12 +2,13 @@
 
 namespace App\Mail;
 
+use App\Models\Task;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class Inviteuser extends Mailable
+class TaskPending extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -16,9 +17,9 @@ class Inviteuser extends Mailable
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct(Task $tasks)
     {
-        $this->data = $data;
+        $this->task = $tasks;
     }
 
     /**
@@ -30,10 +31,7 @@ class Inviteuser extends Mailable
     {
         return 
             $this->from('hourworks33@gmail.com')
-            ->subject('An Invite to Task Manager')
-            ->view('emails.invite.invite')
-            ->with([
-                "url" => url('/'), "data" => $this->data
-            ]);
+            ->subject('Pending Task as on '. date('Y-m-d'))
+            ->view('emails.task.pendingtasks')->with(["task" => $this->task]);
     }
 }

@@ -8,6 +8,8 @@ use App\Models\Project;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\ProjectUser;
+use App\Mail\Inviteuser;
+use Illuminate\Support\Facades\Mail;
 
 class userController extends Controller
 {
@@ -47,10 +49,11 @@ class userController extends Controller
     {
         $company_id = session()->get('userData')['company_id'];
         $this->validateCreateUserForm();
+        $password = "123456";
         $data = User::create([
             "name" => $request->post("name"),
             "email" => $request->post("email"),
-            "password" => "123456",
+            "password" => $password,
             "address1" => $request->post("address1"),
             "address2" => $request->post("address2"),
             "role_id"  => $request->post("role"),
@@ -68,6 +71,14 @@ class userController extends Controller
                 "updated_at" => date('Y-m-d H:i:s')
             ]);
             if($mapper){
+                $invite_user = $company_id = session()->get('userData')['name'];
+                $data = array(
+                    "user" => $request->post("name"),
+                    "user_email" => $request->post("email"),
+                    "password" => $password,
+                    "invite_user" => $invite_user
+                );
+                Mail::to($request->post("email"))->send(new Inviteuser($data));
                 session()->flash('success', 'User Created sucessfully');
                 return redirect('/users');
             } else {

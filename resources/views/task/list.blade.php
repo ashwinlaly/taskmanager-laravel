@@ -10,10 +10,11 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Name</th>
+                <th scope="col">Project Name</th>
+                <th scope="col">Task Name</th>
+                <th scope="col">Description</th>
                 <th scope="col">Assigned to</th>
                 <th scope="col">DeadLine</th>
-                <th scope="col">Description</th>
                 <th scope="col">Status</th>
                 <th scope="col">Action</th>
             </tr>
@@ -23,10 +24,11 @@
                 @foreach($tasks as $key => $task) 
                     <tr>
                         <th scope="row"> {{ $key+1 }}</th>
+                        <td>{{ $task->project->name }}</td>
                         <td>{{ $task->name }}</td>
+                        <td>{{ $task->description }}</td>
                         <td>{{ $task->user->name }}</td>
                         <td>{{ date('Y-m-d', strtotime($task->deadline)) }}</td>
-                        <td>{{ $task->description }}</td>
                         <td>{{ $task->status }}</td>
                         <td>
                             <a class="btn btn-primary" href="{{route('tasks.edit',[$task->id])}}">Edit</a>

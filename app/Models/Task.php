@@ -23,4 +23,9 @@ class Task extends Model
         return $this->hasOne('App\Models\User', 'id', 'user_id');
     }
 
+    public function project()
+    {
+        return $this->hasOne('App\Models\Project', 'id', 'project_id');
+    }
+
 }

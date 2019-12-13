@@ -18,6 +18,9 @@ Route::post('login', 'authController@login');
 Route::get('signup', 'authController@create');
 Route::post('signup', 'authController@store');
 
+Route::get('forgotpassword', 'authController@forgotpasswordget');
+Route::post('forgotpassword', 'authController@forgotpasswordpost');
+
 Route::get('logout', 'authController@logout');
 
 Route::middleware(['checkUserLogedIn'])->group(function() {

@@ -73,7 +73,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="zip">Zip</label>
-                            <input type="text" class="form-control" id="zip" name="zip">
+                            <input type="text" class="form-control" id="zip" name="zip" value="{{old('zip')}}" placeholder="Enter the ZipCode">
                             @if($errors->has('zip'))
                                 <small  class="form-text text-muted error">{{ $errors->first('zip') }}</small>
                             @endif

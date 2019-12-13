@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Mail\Inviteuser;
+use App\Mail\CreatedAccount;
+use App\Mail\ForgotPassword;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 use App\Models\City;
@@ -54,6 +55,28 @@ class authController extends Controller
         return view('auth.signup', compact("cities"));
     }
 
+    public function forgotpasswordget()
+    {
+        return view('auth.forgotpassword');
+    }
+
+    public function forgotpasswordpost(Request $request)
+    {
+        // $this->validateForgotPasswordForm();
+        $user = User::where([
+            'email' => $request->post('email')
+        ])->get();
+
+        if($user->count() == 1){
+            Mail::to($request->post("email"))->send(new ForgotPassword($user));
+            session()->flash('success', 'Reset password sent to Email');
+            return redirect('/');
+        } else {
+            session()->flash('danger', 'No user found.');
+            return redirect('/');
+        }
+    }
+
     // Create user
     public function store(Request $request)
     {
@@ -75,6 +98,7 @@ class authController extends Controller
             "updated_at" => date('Y-m-d H:i:s')
         ]);
         if($data){
+            Mail::to($request->post("email"))->send(new CreatedAccount());
             session()->flash('success', 'Account Created sucessfully, please try login');
             return redirect('/');
         } else {
@@ -87,6 +111,12 @@ class authController extends Controller
         return request()->validate([
             "email" => 'required|email|max:100',
             "password" => "required|max:15"
+        ]);
+    }
+
+    private function validateForgotPasswordForm(){
+        return request()->validate([
+            "email" => 'required|email|max:100'
         ]);
     }
     
@@ -109,8 +139,6 @@ class authController extends Controller
     }
 
     public function dashboard(){
-        // Mail::to('ashwin.n@cgvakindia.com')->send(new Inviteuser());
-
         $company_id = session()->get('userData')['company_id'];
         $user_id = session()->get('userData')['id']; 
         $project_count = Project::where(['company_id' => $company_id])->count();

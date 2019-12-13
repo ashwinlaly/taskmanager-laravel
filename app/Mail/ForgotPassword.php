@@ -2,12 +2,13 @@
 
 namespace App\Mail;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class Inviteuser extends Mailable
+class ForgotPassword extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -16,9 +17,9 @@ class Inviteuser extends Mailable
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct($user)
     {
-        $this->data = $data;
+        $this->user = $user;
     }
 
     /**
@@ -28,12 +29,13 @@ class Inviteuser extends Mailable
      */
     public function build()
     {
-        return 
+        return
             $this->from('hourworks33@gmail.com')
-            ->subject('An Invite to Task Manager')
-            ->view('emails.invite.invite')
+            ->subject('Your password')
+            ->view('emails.invite.forgot_password')
             ->with([
-                "url" => url('/'), "data" => $this->data
+                "url" => url('/'),
+                "data" => $this->user
             ]);
     }
 }

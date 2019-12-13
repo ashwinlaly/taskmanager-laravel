@@ -6,6 +6,8 @@ use App\Models\Project;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TaskAssigned;
 
 class taskController extends Controller
 {
@@ -55,6 +57,8 @@ class taskController extends Controller
             "updated_at" => date('Y-m-d H:i:s')
         ]);
         if($data){
+            $task = Task::find($data->id);
+            Mail::to($task->user->email)->send(new TaskAssigned($task));
             session()->flash('success', 'Task Created Sucessfully');
             return redirect('tasks');
         } else {
@@ -145,6 +149,8 @@ class taskController extends Controller
         $task->status = $status;
         $task->user_id = $assignto;
         $task->save();
+
+        Mail::to($task->user->email)->send(new TaskAssigned($task));
 
         $data = array("status" => 200);
         return json_encode($data);

@@ -7,7 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class Inviteuser extends Mailable
+class CreatedAccount extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -16,9 +16,9 @@ class Inviteuser extends Mailable
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct()
     {
-        $this->data = $data;
+        //
     }
 
     /**
@@ -28,12 +28,12 @@ class Inviteuser extends Mailable
      */
     public function build()
     {
-        return 
+        return
             $this->from('hourworks33@gmail.com')
-            ->subject('An Invite to Task Manager')
-            ->view('emails.invite.invite')
-            ->with([
-                "url" => url('/'), "data" => $this->data
-            ]);
+                ->subject('Account Created Successfully')
+                ->view('emails.invite.create_account')
+                ->with([
+                    "url" => url('/')
+                ]);
     }
 }
