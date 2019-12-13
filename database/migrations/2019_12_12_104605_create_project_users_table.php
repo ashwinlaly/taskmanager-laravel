@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserprojectmappingsTable extends Migration
+class CreateProjectUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateUserprojectmappingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('userprojectmappings', function (Blueprint $table) {
+        Schema::create('project_users', function (Blueprint $table) {
             $table->increments('id');
             $table->bigInteger('project_id');
             $table->bigInteger('user_id');
@@ -29,6 +29,6 @@ class CreateUserprojectmappingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('userprojectmappings');
+        Schema::dropIfExists('project_users');
     }
 }

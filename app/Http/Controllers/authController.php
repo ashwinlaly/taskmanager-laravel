@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Mail\Inviteuser;
+use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 use App\Models\City;
 use App\Models\Company;
+use App\Models\Project;
+use App\Models\Task;
 
 class authController extends Controller
 {
@@ -100,8 +103,26 @@ class authController extends Controller
         ]);
     }
 
+    public function logout(Request $request){
+        $request->session()->flush();
+        return redirect('/');
+    }
+
     public function dashboard(){
-        return view('home.dashboard');
+        // Mail::to('ashwin.n@cgvakindia.com')->send(new Inviteuser());
+
+        $company_id = session()->get('userData')['company_id'];
+        $user_id = session()->get('userData')['id']; 
+        $project_count = Project::where(['company_id' => $company_id])->count();
+        $user_count = User::where(['company_id' => $company_id])->count();
+        $pending_task_count = Task::where(['user_id' => $user_id, 'status' => 1])->count();
+        $completed_task_count = Task::where(['user_id' => $user_id, 'status' => 2])->count();
+        return view('home.dashboard', [
+                "project_count" => $project_count,
+                "user_count" => $user_count,
+                "completed_task_count" => $completed_task_count,
+                "pending_task_count"  => $pending_task_count
+            ]);
     }
 
 }

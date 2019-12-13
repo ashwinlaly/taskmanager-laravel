@@ -15,5 +15,5 @@ class City extends Model
             '3' => 'Removed'
         ][$attribute];
     }
-        
+
 }

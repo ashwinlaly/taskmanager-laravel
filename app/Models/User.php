@@ -19,6 +19,22 @@ class User extends Model
     }
 
     public function city(){
-        $this->belongsTo('App\Models\City', 'city_id', 'id');
+        return $this->hasOne('App\Models\City', 'id', 'city_id');
+    }
+
+    public function role(){
+        return $this->hasOne('App\Models\Role', 'id', 'role_id');
+    }
+
+    public function company(){
+        return $this->hasOne('App\Models\Company', 'id', 'company_id');
+    }
+
+    public function projects(){
+        return $this->hasManyThrough('App\Models\Project',
+                                     'App\Models\ProjectUser', 
+                                     'user_id',
+                                     'id'
+                                    );
     }
 }

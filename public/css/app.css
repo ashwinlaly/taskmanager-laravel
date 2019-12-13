@@ -13,3 +13,22 @@ a.nav-link {
 small.error{
     color: red !important;
 }
+.navigation{
+    display: table;
+}
+.navigation ul{
+    text-align: center;
+}
+.navigation ul li{
+    padding: 10px;
+}
+.dashboard {
+    padding: 35px;
+}
+.dashboard .jumbotron{
+    height: 200px;
+    font-size: 6rem;
+    font-weight: 300;
+    line-height: 0.6;
+    text-align: center;
+}

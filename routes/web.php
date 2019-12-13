@@ -11,37 +11,26 @@
 |
 */
 
-// Login
 Route::get('/', 'authController@index');
-
 Route::get('login', 'authController@index');
 Route::post('login', 'authController@login');
 
-// Register
 Route::get('signup', 'authController@create');
 Route::post('signup', 'authController@store');
 
-// Logout
 Route::get('logout', 'authController@logout');
 
 Route::middleware(['checkUserLogedIn'])->group(function() {
 
-    //Dashboard
+    // For Admin User
     Route::get('dashboard', 'authController@dashboard');
-
-    // Tasks
     Route::resource('tasks', 'taskController');
-
-    // Roles
-    Route::resource('role', 'roleController');
-
-    // Users
-    Route::resource('user', 'userController');
-
-    // Profile
-    Route::get('profile', 'userController@index');
-    Route::post('profile', 'userController@index');
-
+    Route::resource('roles', 'roleController');
+    Route::resource('users', 'userController');
+    Route::resource('profiles', 'profileController');
     Route::resource('projects', 'projectController');
 
+    // For other user
+    Route::get('mytask', 'taskController@getSubUserTasks');
+    Route::post('assigntask', 'taskController@getTaskAssignedto');
 });

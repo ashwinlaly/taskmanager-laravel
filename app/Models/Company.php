@@ -15,4 +15,9 @@ class Company extends Model
             '3' => 'Removed'
         ][$attribute];
     }
+
+    public function projects(){
+        return $this->hasMany('App\Models\Project');
+    }
+
 }
