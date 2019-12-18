@@ -79,6 +79,75 @@
                             <a class="dropdown-item" href="{{ url('logout') }}">Logout</a>
                         </div>
                     </li>
+                @elseif(($role == 3) || ($role == 4))
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Tasks
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ url('mytask') }}">My Tasks</a>
+                            <a class="dropdown-item" href="{{ url('tasks/create') }}">Create Task</a>
+                            <a class="dropdown-item" href="{{ url('tasks') }}">Manage Tasks</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Users
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ url('users/create') }}">Create User</a>
+                            <a class="dropdown-item" href="{{ url('users') }}">Manage Users</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Projects
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ url('projects/create') }}">Create Project</a>
+                            <a class="dropdown-item" href="{{ url('projects') }}">Manage Projects</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Roles
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('roles.create') }}">Create Role</a>
+                            <a class="dropdown-item" href="{{ url('roles') }}">Manage Roles</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown" >
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ ucfirst(session()->get('userData')['name']) }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('profiles.edit', session()->get('userData')['id']) }}">My Profile</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ url('logout') }}">Logout</a>
+                        </div>
+                    </li>
+                @elseif(($role == 5) || ($role == 6))
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Tasks
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ url('mytask') }}">My Tasks</a>
+                            <a class="dropdown-item" href="{{ url('tasks/create') }}">Create Task</a>
+                            <a class="dropdown-item" href="{{ url('tasks') }}">Manage Tasks</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown" >
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ ucfirst(session()->get('userData')['name']) }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('profiles.edit', session()->get('userData')['id']) }}">My Profile</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ url('logout') }}">Logout</a>
+                        </div>
+                    </li>
                 @else
                     <li class="nav-item dropdown active">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
